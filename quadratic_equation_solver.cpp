@@ -1,11 +1,19 @@
 #include <iostream>
 #include <cmath>
+#include <limits>
 using namespace std;
 float read_user_input_value(string variable)
 {
     float float_number;
     cout << "enter the value of "<<variable<<endl;
     cin>>float_number;
+    while (cin.fail())
+    {
+        cin.clear();
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cout<< "Invalid Input , try something else "<<endl;
+        cin>>float_number;
+    }
     return float_number;
 }
 void solve_eq_case_2(float &discriminant,float &variable_a,float &variable_b,float &variable_c)
@@ -42,7 +50,7 @@ void solve_equation(float &variable_a,float &variable_b,float &variable_c)
     else
     {
         float discriminant=(variable_b*variable_b)-(4*variable_a*variable_c);
-        cout<<discriminant<<endl;
+        cout<<"discriminant = "<<discriminant<<endl;
         if (discriminant<0)
         {
             cout<<"this equation has no solution"<<endl;
